@@ -1,0 +1,36 @@
+{% load i18n %}
+<script type="text/javascript">
+    var image_editor = null;
+    {% if value %}
+        (function($){
+            $(function(){
+                image_editor = $("#{{ id }}").image_editor("{% url make_preview %}", "{{ value.name }}", "{{ value.url }}")
+            });
+        })(jQuery);
+    {% endif %}
+</script>
+<div class="image_editor" id="{{ id }}">
+    <div class="edited_image_wrapper">
+        <img src="{{ STATIC_URL }}image_editor/img/noimage.jpg" class="edited_image" />
+    </div>
+
+    <div class="edit_image_tools">
+        <div class="edit_image_buttons">
+            {% for name, button in buttons.items %}
+                <a href="#" class="edit_image_filter_button" id="{{ id }}_button_{{ name }}" title="{{ name }}">
+                    {{ button|safe }}
+                </a>
+            {% endfor %}
+            <div class="clear"></div>
+        </div>
+        <div class="edit_image_settings_panel">
+            {% for initial in initials %}
+                {{ initial|safe }}
+            {% endfor %}
+        </div>
+        <div class="tmp_tools"></div>
+        <div><a href="#" class="image_edit_undo" title="{% trans "Undo" %}">{% trans "Undo" %}</a></div>
+    </div>
+    <input type="hidden" name="{{ name }}" class="image_editor_core_field" />
+    <div class="clear"></div>
+</div>

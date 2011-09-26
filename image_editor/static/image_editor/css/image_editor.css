@@ -1,0 +1,56 @@
+.image_editor { display: none; }
+
+    .clear { clear: both; }
+
+    .edited_image_wrapper { float: left; }
+
+    .edit_image_tools { float: left; margin: 0 0 0 10px; }
+
+    .edit_image_buttons { margin-bottom: 20px; }
+
+        .edit_image_filter_button {
+            display: block;
+            float: left;
+            width: 36px;
+            height: 46px;
+            padding: 3px;
+            margin: 3px;
+            text-decoration: none;
+            font-size: 10px;
+            border: solid 1px #e2e2e2;
+            text-align: center;
+        }
+
+    .image_edit_undo {
+        display: block;
+        height: 16px;
+        padding: 0 0 0 18px;
+        background: url(../img/undo.png) no-repeat left center;
+        color: #89b186;
+        text-decoration: none;
+        font-size: 14px;
+        display: none;
+    }
+
+.filter_auto_apply { display: none; }
+
+/* AJAX LOADING MASK */
+div.loader {
+  background-image: url("../img/ajax-loader.gif");
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 2;
+  position: absolute;
+}
+div.loader div {
+  text-align: center;
+  background-color: #FFFE36;
+  color: #484848;
+}
+
+.ajax-loading {
+  -moz-opacity: .2;
+  opacity: .2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
