@@ -1,0 +1,22 @@
+# Lines that start with '#' are comments.
+# For a project mostly in C, the following would be a good set of
+# exclude patterns (uncomment them if you want to use them):
+# *.[oa]
+
+*~
+
+#Eclipse's specific
+.project
+.pydevproject
+.pydevproject.bak
+
+#PyCharm's specific
+.idea/
+
+#egg's specific
+*.egg-info
+
+#defaults
+*.pyc
+
+image_editor/static/image_editor/previews/
