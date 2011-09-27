@@ -123,7 +123,7 @@ $.Jcrop = function(obj,opt)
 				position: 'relative',
 				backgroundColor: options.bgColor
 			}).insertAfter($origimg).append($img);
-	;
+
 	
 	if (options.addClass) $div.addClass(options.addClass);
 	//$img.wrap($div);

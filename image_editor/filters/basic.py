@@ -1,11 +1,14 @@
 ## -*- coding: utf-8 -*- ####################################################
 
 from django.forms.widgets import MediaDefiningClass
+from django.utils import simplejson
 
-class ImageEditToolBasic():
+class ImageEditToolBasic(object):
     __metaclass__ = MediaDefiningClass
 
-    name = None
+    def __init__(self, name, options=None):
+        self.name = name
+        self.options = simplejson.dumps(options or {})
 
     def render_button(self, attrs, filter_name):
         raise NotImplementedError

@@ -31,7 +31,7 @@ class FixedRatioImageCropTool(ImageEditToolBasic):
         return '<img src="%(static_url)s%(image_url)s" style="margin: 6px;" /><br/>%(filter_title)s \
                 <script>$(function(){ $("#%(id)s_button_crop").cropper("%(id)s") });</script>' % \
                dict(
-                    static_url=settings.STATIC_URL,
+                    static_url=settings.STATIC_URL or settings.MEDIA_URL,
                     image_url='image_editor/img/crop.png',
                     id=attrs['id'],
                     filter_title=ugettext('Crop')

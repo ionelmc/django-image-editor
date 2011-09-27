@@ -33,7 +33,7 @@ class ImageEditWidget(Widget):
                 buttons[name] = button
             initials.append(filter.render_initial(attrs=final_attrs, filter_name=name))
         final_attrs.update({
-            'STATIC_URL': settings.STATIC_URL,
+            'STATIC_URL': getattr(settings, 'STATIC_URL', settings.MEDIA_URL),
             'buttons': buttons,
             'initials': initials
         })

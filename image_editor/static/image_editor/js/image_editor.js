@@ -64,7 +64,7 @@
         return {
             'apply': apply_changes
         };
-    }
+    };
 
     $.fn.loadIndicator = function(text) {
         //Append loader indicator
@@ -78,4 +78,4 @@
         //Erase loader indicator
         $(this).removeClass('ajax-loading').prev('div.loader').remove();
     };
-})(jQuery)
+})(jQuery);

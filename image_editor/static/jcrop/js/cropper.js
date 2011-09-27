@@ -1,16 +1,18 @@
 (function($){
-    $.fn.cropper = function(id){
+    $.fn.cropper = function(id, options){
         var button = $(this),
             container = $('#' + id),
             image = container.find('img.edited_image'),
             crop_api = null;
 
         button.click(function(e){
-//            e.preventDefault();
 
             if(!crop_api){
                 crop_api = $.Jcrop(image, {});
-                image.Jcrop();
+                image.Jcrop(options);
+                if (options.initialCoords) {
+                    crop_api.setSelect(options.initialCoords);
+                }
 
                 container.find('.tmp_tools')
                          .html('<a href="#" class="crop_apply">Apply</a>&nbsp;&nbsp;<a href="#" class="crop_cancel">Cancel</a>')

@@ -12,7 +12,7 @@ class ImageDetailFilter(ImageEditToolBasic):
         return '<img src="%(static_url)s%(image_url)s" /><br/>%(filter_title)s\
                 <span class="filter_auto_apply" filter_name="%(name)s" filter_params="{}"></span>' % \
         dict(
-            static_url=settings.STATIC_URL,
+            static_url=settings.STATIC_URL or settings.MEDIA_URL,
             image_url='image_editor/img/detail.jpeg',
             name=filter_name,
             filter_title=ugettext('Detail')
