@@ -1,0 +1,3 @@
+include README
+recursive-include image_editor/static *
+recursive-include image_editor/templates *
