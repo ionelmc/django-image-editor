@@ -498,19 +498,16 @@
         }
       }
       //}}}
-      function getFixed() //{{{
+      function getFixed()
       {
         if (!options.aspectRatio) {
           return getRect();
         }
+
         // This function could use some optimization I think...
         var aspect = options.aspectRatio,
-            min_x = options.minSize[0] / xscale,
-
-
-            //min_y = options.minSize[1]/yscale,
-            max_x = options.maxSize[0] / xscale,
-            max_y = options.maxSize[1] / yscale,
+            min = options.minSize,
+            max = options.maxSize,
             rw = x2 - x1,
             rh = y2 - y1,
             rwa = Math.abs(rw),
@@ -518,84 +515,84 @@
             real_ratio = rwa / rha,
             xx, yy;
 
-        if (max_x === 0) {
-          max_x = boundx * 10;
-        }
-        if (max_y === 0) {
-          max_y = boundy * 10;
-        }
-        if (real_ratio < aspect) {
+        if (real_ratio < aspect)
+        {
           yy = y2;
           w = rha * aspect;
           xx = rw < 0 ? x1 - w : w + x1;
-
-          if (xx < 0) {
+          rwa = Math.abs(xx-x1)
+          h = rwa / aspect;
+          //new//
+          if(xmin && (rwa < xmin))
+            xx = (rw > 0) ? (x1 + xmin) : (x1 - xmin);
+          if(ymin && (rha < ymin))
+            yy = (rh > 0) ? (y1 + ymin) : (y1 - ymin);
+          //end new//
+          if (xx < 0)
+          {
             xx = 0;
             h = Math.abs((xx - x1) / aspect);
-            yy = rh < 0 ? y1 - h : h + y1;
-          } else if (xx > boundx) {
+            yy = rh < 0 ? y1 - h: h + y1;
+            //new//
+            if(xmin && (rwa < xmin))
+                    xx = (rw > 0) ? (x1 + xmin) : (x1 - xmin);
+            if(ymin && (rha < ymin))
+                    yy = (rh > 0) ? (y1 + ymin) : (y1 - ymin);
+            //end new//
+          }
+          else if (xx > boundx)
+          {
             xx = boundx;
             h = Math.abs((xx - x1) / aspect);
             yy = rh < 0 ? y1 - h : h + y1;
+            //new//
+            if(xmin && (rwa < xmin))
+                    xx = (rw > 0) ? (x1 + xmin) : (x1 - xmin);
+            if(ymin && (rha < ymin))
+                    yy = (rh > 0) ? (y1 + ymin) : (y1 - ymin);
+            //end new//
           }
-        } else {
+        }
+        else
+        {
           xx = x2;
           h = rwa / aspect;
           yy = rh < 0 ? y1 - h : y1 + h;
-          if (yy < 0) {
+          rha = Math.abs(yy-y1)
+          w = rha * aspect;
+          //new//
+          if(xmin && (rwa < xmin))
+            xx = (rw > 0) ? (x1 + xmin) : (x1 - xmin);
+          if(ymin && (rha < ymin))
+            yy = (rh > 0) ? (y1 + ymin) : (y1 - ymin);
+          //end new//
+          if (yy < 0)
+          {
             yy = 0;
             w = Math.abs((yy - y1) * aspect);
             xx = rw < 0 ? x1 - w : w + x1;
-          } else if (yy > boundy) {
+            //new//
+            if(xmin && (rwa < xmin))
+                    xx = (rw > 0) ? (x1 + xmin) : (x1 - xmin);
+            if(ymin && (rha < ymin))
+                    yy = (rh > 0) ? (y1 + ymin) : (y1 - ymin);
+            //end new//
+          }
+          else if (yy > boundy)
+          {
             yy = boundy;
             w = Math.abs(yy - y1) * aspect;
             xx = rw < 0 ? x1 - w : w + x1;
+            //new//
+            if(xmin && (rwa < xmin))
+                    xx = (rw > 0) ? (x1 + xmin) : (x1 - xmin);
+            if(ymin && (rha < ymin))
+                    yy = (rh > 0) ? (y1 + ymin) : (y1 - ymin);
+            //end new//
           }
         }
-
-        // Magic %-)
-        if (xx > x1) { // right side
-          if (xx - x1 < min_x) {
-            xx = x1 + min_x;
-          } else if (xx - x1 > max_x) {
-            xx = x1 + max_x;
-          }
-          if (yy > y1) {
-            yy = y1 + (xx - x1) / aspect;
-          } else {
-            yy = y1 - (xx - x1) / aspect;
-          }
-        } else if (xx < x1) { // left side
-          if (x1 - xx < min_x) {
-            xx = x1 - min_x;
-          } else if (x1 - xx > max_x) {
-            xx = x1 - max_x;
-          }
-          if (yy > y1) {
-            yy = y1 + (x1 - xx) / aspect;
-          } else {
-            yy = y1 - (x1 - xx) / aspect;
-          }
-        }
-
-        if (xx < 0) {
-          x1 -= xx;
-          xx = 0;
-        } else if (xx > boundx) {
-          x1 -= xx - boundx;
-          xx = boundx;
-        }
-
-        if (yy < 0) {
-          y1 -= yy;
-          yy = 0;
-        } else if (yy > boundy) {
-          y1 -= yy - boundy;
-          yy = boundy;
-        }
-
-        return makeObj(flipCoords(x1, y1, xx, yy));
-      }
+        return makeObj(flipCoords(x1,y1,xx,yy));
+      };
       //}}}
       function rebound(p) //{{{
       {
